@@ -9,10 +9,40 @@
 <html>
 <head>
     <title>World Adventures Airlines</title>
+    <link rel="stylesheet" href="views/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
 <div id="container">
     <div id="title">Add a passenger</div>
+
+    <%
+        if (request.getAttribute("error") != null) {
+
+
+    %>
+    <fieldset>
+        <legend>Errors</legend>
+        <ul>
+            <%if (request.getAttribute("firstname_error") != null) { %>
+            <li class="error">First name Error</li>
+            <% } %>
+
+            <%if (request.getAttribute("lastname_error") != null) { %>
+            <li class="error">Last name Error</li>
+            <% } %>
+
+            <%if (request.getAttribute("date_format_error") != null) { %>
+            <li class="error">Date of Birth Error</li>
+            <% } %>
+        </ul>
+    </fieldset>
+
+    <%
+        }
+    %>
 
     <fieldset>
         <legend>Passenger details</legend>
@@ -40,13 +70,13 @@
                 </select>
             </div>
 
-
+            <div class="inputField" id="submitField">
+                <input id="submitBtn" type="submit" value="Add new passenger">
+            </div>
         </form>
     </fieldset>
 
-    <div class="inputField" id="submitField">
-        <input id="submitBtn" type="submit" value="Add new passenger">
-    </div>
+
 </div>
 
 </body>

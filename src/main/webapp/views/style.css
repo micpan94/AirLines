@@ -1,0 +1,15 @@
+body {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: x-large;
+    background-image: url("prism.png");
+}
+#submitBtn{
+    font-size:18px;
+   background-image: url("prism.png");
+    margin-top: 6px;
+}
+
+submitBrn:hover{
+    background-color: white;
+
+}
