@@ -19,10 +19,45 @@
     <div id="title">Add a passenger</div>
 
     <%
-        if (request.getAttribute("errors") != null){
-            response.getWriter().println("TEst");
+        if (request.getAttribute("errors") != null) {
+    %>
+    <fieldset>
+        <ul>
+            <%--            // first name erero--%>
+            <%
+                if (request.getAttribute("firstname_error") != null) {
+            %>
+            <li>First name error</li>
+            <%
+                }
+            %>
+            <%--&lt;%&ndash;&ndash;%&gt; last name error--%>
+            <%
+                if (request.getAttribute("lastname_error") != null) {
+            %>
+            <li>last name error
+            </li>
+            <%
+                }
+            %>
+            <%--           dob erereo--%>
+
+            <%
+                if (request.getAttribute("date_format_error") != null) {
+            %>
+            <li>date format error
+            </li>
+            <%
+                }
+            %>
+        </ul>
+    </fieldset>
+
+    <%
         }
     %>
+
+
 
 
     <fieldset>
