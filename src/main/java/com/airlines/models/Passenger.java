@@ -1,13 +1,13 @@
 package com.airlines.models;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 
 public class Passenger {
 
     private String firstName;
     private String lastName;
-    private LocalDate date;
+    private Date date;
     private Gender gender;
 
     public String getFirstName() {
@@ -26,11 +26,11 @@ public class Passenger {
         this.lastName = lastName;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

@@ -1,5 +1,7 @@
 package com.airline.controllers;
 
+import com.airlines.models.Gender;
+import com.airlines.models.Passenger;
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 
 import javax.servlet.RequestDispatcher;
@@ -9,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,12 +29,15 @@ public class AddPassenger extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Passenger passenger1 = new Passenger();
         req.setAttribute("errors", false);
         String firstName = req.getParameter("first-name");
         if (firstName.length() == 0) {
             resp.getWriter().println("error");
             req.setAttribute("errors", true);
             req.setAttribute("firstname_error", true);
+        } else {
+            passenger1.setFirstName(firstName);
         }
 
         resp.getWriter().println(firstName);
@@ -39,7 +46,7 @@ public class AddPassenger extends HttpServlet {
             req.setAttribute("errors", true);
             req.setAttribute("lastname_error", true);
         } else {
-            resp.getWriter().println(lastName);
+            passenger1.setLastName(lastName);
         }
 
         String dob = req.getParameter("dob");
@@ -61,7 +68,7 @@ public class AddPassenger extends HttpServlet {
 
             Date date = cal.getTime();
 
-            resp.getWriter().println(date);
+            passenger1.setDate(date);
         } else {
             req.setAttribute("errors", true);
             req.setAttribute("date_format_error", true);
@@ -70,12 +77,17 @@ public class AddPassenger extends HttpServlet {
 
         }
         String gender = req.getParameter("gender");
-        resp.getWriter().println(gender);
+        passenger1.setGender(Gender.valueOf(gender));
 
 
-        if ((Boolean) req.getAttribute("errors")){
+        if ((Boolean) req.getAttribute("errors")) {
             RequestDispatcher view = req.getRequestDispatcher("views/add_passenger.jsp");
-            view.forward(req,resp);
+            view.forward(req, resp);
+        } else {
+            List<Passenger> passengerList = new ArrayList<>();
+            passengerList.add(passenger1);
+
+            resp.sendRedirect("");
         }
 
 
