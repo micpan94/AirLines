@@ -65,7 +65,7 @@
         <form action="AddPassenger" method="post">
             <div class="inputField">
                 <label for="first-name" class="inputLabel">First name :</label>
-                <input name="first-name" type="text" id="first-name">
+                <input name="first-name" type="text" id="first-name" value="<%=request.getAttribute("first_name")%>">
             </div>
 
             <div class="inputField">

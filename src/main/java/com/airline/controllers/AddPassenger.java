@@ -37,8 +37,10 @@ public class AddPassenger extends HttpServlet {
             resp.getWriter().println("error");
             req.setAttribute("errors", true);
             req.setAttribute("firstname_error", true);
+            req.setAttribute("first_name","");
         } else {
             passenger1.setFirstName(firstName);
+            req.setAttribute("first_name",firstName);
         }
 
         resp.getWriter().println(firstName);
@@ -86,13 +88,14 @@ public class AddPassenger extends HttpServlet {
             view.forward(req, resp);
         } else {
             ServletContext sc = this.getServletContext();
-            List<Passenger> passengerList = (ArrayList<Passenger>) sc.getAttribute("passengers");
+            synchronized (this) {
+                List<Passenger> passengerList = (ArrayList<Passenger>) sc.getAttribute("passengers");
+                passengerList.add(passenger1);
+                sc.setAttribute("passengers", passengerList);
+            }
 
-            passengerList.add(passenger1);
 
-            sc.setAttribute("passengers", passengerList);
-
-            resp.sendRedirect("/");
+            resp.sendRedirect("");
         }
 
 
