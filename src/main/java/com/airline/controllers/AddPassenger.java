@@ -5,6 +5,7 @@ import com.airlines.models.Passenger;
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -84,10 +85,14 @@ public class AddPassenger extends HttpServlet {
             RequestDispatcher view = req.getRequestDispatcher("views/add_passenger.jsp");
             view.forward(req, resp);
         } else {
-            List<Passenger> passengerList = new ArrayList<>();
+            ServletContext sc = this.getServletContext();
+            List<Passenger> passengerList = (ArrayList<Passenger>) sc.getAttribute("passengers");
+
             passengerList.add(passenger1);
 
-            resp.sendRedirect("");
+            sc.setAttribute("passengers", passengerList);
+
+            resp.sendRedirect("/");
         }
 
 
